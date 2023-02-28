@@ -1,0 +1,28 @@
+{% extends 'base.html' %} {% block conteudo %}
+
+<h2 style="text-align: center">Filmes</h2>
+<hr />
+
+<div class="row">
+  {% for filme in filmes %}
+  <div class="col-md-3">
+    <!-- https://getbootstrap.com/docs/5.2/components/card/ -->
+    <div class="card" style="width: 18rem">
+      <img
+        src="http://image.tmdb.org/t/p/w500{{filme.backdrop_path}}"
+        class="card-img-top"
+        alt="..."
+      />
+      <div class="card-body">
+        <h5 class="card-title">{{filme.title}}</h5>
+        <p class="card-text">{{filme.overview}}</p><hr />
+        <a href="#" class="btn btn-primary">Nota média: {{filme.vote_average}}</a>
+      </div>
+    </div>
+    <br />
+  </div>
+
+  {% endfor %}
+</div>
+
+{% endblock conteudo %}

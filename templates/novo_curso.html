@@ -1,0 +1,40 @@
+{% extends 'base.html' %} {% block conteudo %}
+
+<h2 style="text-align: center">Adiciona Cursos</h2>
+<hr />
+
+<!--utilizando o modulo flash para validação-->
+{%- for mensagem in get_flashed_messages() %}
+<div class="alert alert-danger">{{mensagem}}</div>
+
+{%- endfor %}
+
+<form action="{{url_for('cria_curso')}}" method="POST" class="form-control">
+  <label>Nome</label>
+  <input
+    class="form-control"
+    type="text"
+    name="nome"
+    placeholder="Nome do curso"
+    required
+  />
+  <label>Descrição</label>
+  <input
+    class="form-control"
+    type="text"
+    name="descricao"
+    placeholder="Descrição do curso"
+    required
+  />
+  <label>CH</label>
+  <input
+    class="form-control"
+    type="number"
+    name="cargaHoraria"
+    placeholder="CH do curso"
+    required
+  />
+  <button class="btn btn-success">Adicionar</button>
+</form>
+
+{% endblock conteudo %}

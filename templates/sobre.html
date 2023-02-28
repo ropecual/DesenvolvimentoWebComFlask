@@ -1,0 +1,57 @@
+{% extends 'base.html' %} {% block conteudo %}
+<h2>Notas</h2>
+<hr />
+
+<!-- <ol>
+  {% for registro in registros %}
+  <details>
+    <summary>{{registro.aluno}}</summary>
+    <p>{{registro.nota}}</p>
+  </details>
+  {% endfor %}
+</ol> -->
+
+{% for registro in registros %}
+
+<p>
+  <a
+    class="btn btn-primary"
+    data-bs-toggle="collapse"
+    href="#id{{registro.id}}"
+    role="button"
+    aria-expanded="false"
+    aria-controls="id{{registro.id}}"
+  >
+    {{registro.aluno}}
+  </a>
+</p>
+<div class="collapse" id="id{{registro.id}}">
+  <div class="card card-body">{{registro.nota}}</div>
+</div>
+
+{% endfor %}
+
+<form action="{{url_for('sobre')}}" method="POST">
+  <div class="form-group">
+    <label>Digite o Nome</label>
+    <input
+      type="text"
+      name="nome"
+      required
+      class="form-control"
+      placeholder="Digite o valor"
+    />
+    <label>Digite a Nota</label>
+    <input
+      type="text"
+      name="nota"
+      required
+      class="form-control"
+      placeholder="Digite o valor"
+    />
+  </div>
+  <br />
+  <button class="btn btn-primary">Adicionar</button>
+</form>
+
+{% endblock conteudo %}

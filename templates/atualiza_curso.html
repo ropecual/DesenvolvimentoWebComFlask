@@ -1,0 +1,39 @@
+{% extends 'base.html' %} {% block conteudo %}
+
+<h2 style="text-align: center">Atualizar Cursos</h2>
+<hr />
+
+<!--utilizando o modulo flash para validação-->
+{%- for mensagem in get_flashed_messages() %}
+<div class="alert alert-danger">{{mensagem}}</div>
+{%- endfor %}
+
+<form
+  action="{{url_for('atualiza_curso',id=curso.id)}}"
+  method="POST"
+  class="form-control"
+>
+  <label>Nome</label>
+  <input
+    class="form-control"
+    type="text"
+    name="nome"
+    value="{{curso.nome}}"
+    required
+  />
+  <label>Descrição</label>
+  <textarea class="form-control" type="text" name="descricao" required>
+  {{curso.descricao}}
+  </textarea>
+  <label>CH</label>
+  <input
+    class="form-control"
+    type="number"
+    name="cargaHoraria"
+    value="{{curso.cargaHoraria}}"
+    required
+  />
+  <button class="btn btn-success">Atualizar</button>
+</form>
+
+{% endblock conteudo %}

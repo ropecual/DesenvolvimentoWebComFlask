@@ -1,0 +1,67 @@
+{% extends 'base.html' %} {% block conteudo %}
+
+<h2 style="text-align: center">Cursos</h2>
+<hr />
+
+<a href="{{url_for('cria_curso')}}" class="btn btn-secondary"
+  >Adcionar Novo Curso</a
+>
+<br /><br />
+<table class="table table-hover table-bordered">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Descrição</th>
+      <th scope="col">Carga Horária</th>
+      <th scope="col">Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- % for curso in opcoesCursos %} Se for usar sem paginação-->
+    <!--utilizando com paginacao-->
+    {% for curso in opcoesCursos.items %}
+    <tr>
+      <td>{{curso.id}}</td>
+      <td>{{curso.nome}}</td>
+      <td>{{curso.descricao}}</td>
+      <td>{{curso.cargaHoraria}}</td>
+      <td>
+        <!-- Link conforme a nova rota criada para atualizar cursos-->
+        <a href="{{curso.id}}/atualiza_curso" class="btn btn-secondary btn-xs"
+          >Editar</a
+        >
+        <!-- Utilizamos a função onclick e return para dar uma mensagem antes da exclusão, aumentando assim a segurança-->
+        <a
+          href="{{curso.id}}/exclui_curso"
+          onclick="return confirm('Deseja Excluir realmente? ')"
+          class="btn btn-danger btn-xs"
+          >Excluir</a
+        >
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<!--Necessário para a paginação-->
+{% if opcoesCursos.has_prev %}
+<p>
+  <a
+    href="{{url_for('cursosDisponiveis', page=opcoesCursos.prev_num)}}"
+    class="btn btn-success btn-xs"
+    >Cursos Anteriores</a
+  >
+</p>
+{% else%}
+<p class="btn btn-success btn-xs">Cursos Listados</p>
+{% endif %} {% if opcoesCursos.has_next %}
+<p>
+  <a
+    href="{{url_for('cursosDisponiveis', page=opcoesCursos.next_num)}}"
+    class="btn btn-success btn-xs"
+    >Próximos Cursos</a
+  >
+</p>
+{% else%}
+<p class="btn btn-success btn-xs">Cursos Listados</p>
+{% endif %} {% endblock conteudo %}
